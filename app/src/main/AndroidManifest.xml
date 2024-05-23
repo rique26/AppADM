@@ -15,10 +15,22 @@
         android:theme="@style/Theme.AppADM"
         tools:targetApi="31">
         <activity
-            android:name=".dialog_relogio"
-            android:exported="false" />
+            android:name=".TelaControleInicial"
+            android:exported="true" />
+        <activity
+            android:name=".TelaAgendaInicial"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".TelaControle"
+            android:exported="false" />
+        <activity
+            android:name=".FormLogin"
             android:exported="false" />
         <activity
             android:name=".TelaPrincipal"
@@ -30,26 +42,11 @@
             android:name=".TelaCadastroTeste"
             android:exported="false" />
         <activity
-            android:name=".TelaCadastro3"
-            android:exported="false" />
-        <activity
-            android:name=".TelaCadastro2"
-            android:exported="false" />
-        <activity
             android:name=".TelaCadastroOficial"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-        <activity
-            android:name=".FormLogin"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

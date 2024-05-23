@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:id="@+id/formlogin"
@@ -17,43 +18,45 @@
 
 
         <ImageView
-            android:id="@+id/logo"
+            android:id="@+id/image_logo"
             android:layout_width="124dp"
             android:layout_height="124dp"
             android:layout_marginTop="45dp"
             android:src="@drawable/login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/text_titulo"/>
 
         <TextView
-            android:id="@+id/titulo"
+            android:id="@+id/text_titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/bold"
-            android:text="@string/titulo"
+            android:text="@string/text_titulo"
             android:textColor="@color/white"
             android:textSize="50sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logo" />
+            app:layout_constraintTop_toBottomOf="@id/image_logo"
+            app:layout_constraintBottom_toTopOf="@id/text_titulo2"/>
 
         <TextView
-            android:id="@+id/titulo2"
+            android:id="@+id/text_titulo2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="55dp"
             android:fontFamily="@font/bold"
-            android:text="@string/titulo2"
+            android:text="@string/text_titulo2"
             android:textColor="@color/white"
             android:textSize="25sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/titulo" />
+            app:layout_constraintTop_toBottomOf="@id/text_titulo"
+            app:layout_constraintBottom_toTopOf="@id/edit_email"/>
 
         <EditText
-            android:id="@+id/login"
+            android:id="@+id/edit_email"
             style="@style/Edit_Text"
             android:layout_marginTop="65dp"
             android:drawableRight="@drawable/ic_email"
@@ -62,10 +65,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titulo2" />
+            app:layout_constraintTop_toBottomOf="@id/text_titulo2"
+            app:layout_constraintBottom_toTopOf="@id/edit_senha"/>
 
         <EditText
-            android:id="@+id/senha"
+            android:id="@+id/edit_senha"
             style="@style/Edit_Text"
             android:layout_marginTop="20dp"
             android:drawableRight="@drawable/ic_eye"
@@ -73,23 +77,26 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/login" />
+            app:layout_constraintTop_toBottomOf="@id/edit_email"
+            app:layout_constraintBottom_toTopOf="@id/edit_celular"/>
 
         <EditText
-            android:id="@+id/entrar_com_celular"
+            android:id="@+id/edit_celular"
             style="@style/Edit_Text"
             android:layout_marginTop="18dp"
             android:hint="Entrar com celular"
             android:inputType="number"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/senha" />
+            app:layout_constraintTop_toBottomOf="@id/edit_senha"
+            app:layout_constraintBottom_toTopOf="@id/text_esqueci_senha"
+            />
 
         <TextView
-            android:id="@+id/esqueci_senha"
+            android:id="@+id/text_esqueci_senha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="50dp"
             android:fontFamily="@font/nunito_sb_ita"
             android:text="Esqueci minha senha"
             android:textColor="@color/white"
@@ -97,7 +104,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/senha" />
+            app:layout_constraintTop_toBottomOf="@id/edit_celular"
+            app:layout_constraintBottom_toTopOf="@id/button_entrar"/>
 
         <Button
             android:id="@+id/button_entrar"
@@ -109,21 +117,24 @@
             android:textSize="19sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/esqueci_senha"
-
+            app:layout_constraintTop_toBottomOf="@id/text_esqueci_senha"
+            app:layout_constraintBottom_toTopOf="@id/button_criar_conta"
             />
 
         <Button
             android:id="@+id/button_criar_conta"
             style="@style/Button"
             android:background="@drawable/button_border"
+            android:layout_marginBottom="30dp"
             android:text="Criar uma conta"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:backgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_entrar" />
+            app:layout_constraintTop_toBottomOf="@id/button_entrar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

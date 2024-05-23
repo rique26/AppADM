@@ -1,13 +1,18 @@
 package com.example.appadm
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -16,20 +21,32 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.appadm.ViewModel.ControleViewModel
+import com.example.appadm.data.DataSourceSintomas
+import com.example.appadm.databinding.ActivityTelaControleBinding
+import com.example.appadm.databinding.ResImgVerificadoBinding
 
 class TelaControle : AppCompatActivity() {
 
-
+    private lateinit var binding: ActivityTelaControleBinding
+    private lateinit var txtButtonData: TextView
+    private lateinit var buttonSalvar: Button
+    private var dataSelecionada: String = ""
+    private var horaSelecionada: String = "14:32"
+    private var sintomaAtual: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_tela_controle)
+        this.binding = ActivityTelaControleBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         Log.i("LOG", "onCreate() TelaControle")
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        txtButtonData = findViewById(R.id.txt_buttonData)
+        buttonSalvar = findViewById(R.id.buttonSalvar)
 
 
     }
@@ -53,145 +70,91 @@ class TelaControle : AppCompatActivity() {
             exibirRelogio()
         }
 
-        val imageButton1 = findViewById<ImageButton>(R.id.imageButton1_1)
-        val imageButton2 = findViewById<ImageButton>(R.id.imageButton2_2)
-        val imageButton3 = findViewById<ImageButton>(R.id.imageButton3_3)
-        val imageButton4 = findViewById<ImageButton>(R.id.imageButton4_4)
 
 
-        val txtDisposicao1 = findViewById<TextView>(R.id.txt_imageButton1_1)
-        val txtDisposicao2 = findViewById<TextView>(R.id.txt_imageButton2_2)
-        val txtDisposicao3 = findViewById<TextView>(R.id.txt_imageButton3_3)
-        val txtDisposicao4 = findViewById<TextView>(R.id.txt_imageButton4_4)
 
 
-        imageButton1.setOnClickListener {
+
+
+        this.binding.imageButton11.setOnClickListener {
             // Altera a imagem do ImageButton
-            imageButton1.setImageResource(R.drawable.rosto_1_40_azul)
-            imageButton2.setImageResource(R.drawable.rosto_2_36)
-            imageButton3.setImageResource(R.drawable.rosto_3_36)
-            imageButton4.setImageResource(R.drawable.rosto_4_36)
-
-            txtDisposicao1.text = "Ótimo"
-            txtDisposicao2.text = ""
-            txtDisposicao3.text = ""
-            txtDisposicao4.text = ""
-        }
-
-        imageButton2.setOnClickListener {
-            // Altera a imagem do ImageButton
-            imageButton2.setImageResource(R.drawable.rosto_2_40_azul)
-            imageButton1.setImageResource(R.drawable.rosto_1_36)
-            imageButton3.setImageResource(R.drawable.rosto_3_36)
-            imageButton4.setImageResource(R.drawable.rosto_4_36)
-
-            txtDisposicao2.text = "Bem"
-            txtDisposicao1.text = ""
-            txtDisposicao3.text = ""
-            txtDisposicao4.text = ""
-        }
-
-        imageButton3.setOnClickListener {
-            // Altera a imagem do ImageButton
-            imageButton3.setImageResource(R.drawable.rosto_3_40_azul)
-            imageButton1.setImageResource(R.drawable.rosto_1_36)
-            imageButton2.setImageResource(R.drawable.rosto_2_36)
-            imageButton4.setImageResource(R.drawable.rosto_4_36)
-
-            txtDisposicao3.text = "Estranho"
-            txtDisposicao2.text = ""
-            txtDisposicao1.text = ""
-            txtDisposicao4.text = ""
-        }
-
-        imageButton4.setOnClickListener {
-            // Altera a imagem do ImageButton
-            imageButton4.setImageResource(R.drawable.rosto_4_40_azul)
-            imageButton1.setImageResource(R.drawable.rosto_1_36)
-            imageButton2.setImageResource(R.drawable.rosto_2_36)
-            imageButton3.setImageResource(R.drawable.rosto_3_36)
-
-            txtDisposicao4.text = "Mal"
-            txtDisposicao2.text = ""
-            txtDisposicao3.text = ""
-            txtDisposicao1.text = ""
-        }
-
-        val includeView = findViewById<ConstraintLayout>(R.id.include)
-        val imageButtonInInclude2 = includeView.findViewById<ImageButton>(R.id.imageButton2)
-        val imageButtonInInclude3 = includeView.findViewById<ImageButton>(R.id.imageButton3)
-        val imageButtonInInclude1 = includeView.findViewById<ImageButton>(R.id.imageButton1)
-
-        val textViewToChangeColor2 = findViewById<TextView>(R.id.txt_imageButton2)
-        val textViewToChangeColor3 = findViewById<TextView>(R.id.txt_imageButton3)
-        val textViewToChangeColor1 = findViewById<TextView>(R.id.txt_imageButton1)
-
-        imageButtonInInclude2.setImageResource(R.drawable.controle_azul)
-
-        imageButtonInInclude2.setOnClickListener {
-            // Altera a imagem do ImageButton
-            imageButtonInInclude2.setImageResource(R.drawable.controle_azul)
-            imageButtonInInclude1.setImageResource(R.drawable.schedule)
-            imageButtonInInclude3.setImageResource(R.drawable.emergencia)
-
-            textViewToChangeColor2.setTextColor(ContextCompat.getColor(this, R.color.blue_light))
-            textViewToChangeColor1.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    androidx.cardview.R.color.cardview_dark_background
-                )
-            )
-            textViewToChangeColor3.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    androidx.cardview.R.color.cardview_dark_background
-                )
-            )
+            setImages()
+            setText()
+            this.binding.imageButton11.setImageResource(R.drawable.rosto_1_40_azul)
+            this.binding.txtImageButton11.text = "Ótimo"
+            sintomaAtual = "Ótimo"
 
         }
 
-        imageButtonInInclude3.setOnClickListener {
+        this.binding.imageButton22.setOnClickListener {
             // Altera a imagem do ImageButton
-            imageButtonInInclude3.setImageResource(R.drawable.controle_azul)
-            imageButtonInInclude1.setImageResource(R.drawable.schedule)
-            imageButtonInInclude2.setImageResource(R.drawable.felicidade)
+            setImages()
+            setText()
+            this.binding.imageButton22.setImageResource(R.drawable.rosto_2_40_azul)
+            this.binding.txtImageButton22.text = "Bem"
+            sintomaAtual = "Bem"
 
-            textViewToChangeColor3.setTextColor(ContextCompat.getColor(this, R.color.blue_light))
-            textViewToChangeColor1.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    androidx.cardview.R.color.cardview_dark_background
-                )
-            )
-            textViewToChangeColor2.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    androidx.cardview.R.color.cardview_dark_background
-                )
-            )
         }
 
-        imageButtonInInclude1.setOnClickListener {
+        this.binding.imageButton33.setOnClickListener {
             // Altera a imagem do ImageButton
-            imageButtonInInclude1.setImageResource(R.drawable.controle_azul)
-            imageButtonInInclude2.setImageResource(R.drawable.felicidade)
-            imageButtonInInclude3.setImageResource(R.drawable.emergencia)
+            setImages()
+            setText()
+            this.binding.imageButton33.setImageResource(R.drawable.rosto_3_40_azul)
+            this.binding.txtImageButton33.text = "Estranho"
+            sintomaAtual = "Estranho"
 
-            textViewToChangeColor1.setTextColor(ContextCompat.getColor(this, R.color.blue_light))
-            textViewToChangeColor2.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    androidx.cardview.R.color.cardview_dark_background
-                )
-            )
-            textViewToChangeColor3.setTextColor(
-                ContextCompat.getColor(
-                    this,
-                    androidx.cardview.R.color.cardview_dark_background
-                )
-            )
         }
-    }
+
+        this.binding.imageButton44.setOnClickListener {
+            // Altera a imagem do ImageButton
+            setImages()
+            setText()
+            this.binding.imageButton44.setImageResource(R.drawable.rosto_4_40_azul)
+            this.binding.txtImageButton44.text = "Mal"
+            sintomaAtual = "Mal"
+
+        }
+
+
+
+
+
+
+
+
+
+
+        binding.buttonSalvar.setOnClickListener {
+            DataSourceSintomas.createDataSet(dataSelecionada, horaSelecionada, sintomaAtual)
+            val inflater = LayoutInflater.from(this)
+            val layout = ResImgVerificadoBinding.inflate(inflater)
+
+            val toast = Toast(this)
+            toast.duration = Toast.LENGTH_SHORT
+            toast.view = layout.root
+
+            // Definir o tamanho do Toast como MATCH_PARENT
+            layout.root.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+
+            // Definir a posição do Toast sobre o botão "Salvar"
+            toast.setGravity(Gravity.CENTER or Gravity.CENTER,
+                0,
+                binding.buttonSalvar.top)
+
+            // Exibir o Toast
+            toast.show()
+
+            startActivity(Intent(this, TelaControleInicial::class.java))
+
+        }
+
+
+
+
+}
+
+
 
     override fun onPause() {
         super.onPause()
@@ -215,11 +178,10 @@ class TelaControle : AppCompatActivity() {
 
         val calendarView = dialog.findViewById<CalendarView>(R.id.calendarView)
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val dataSelecionada = "$dayOfMonth / ${month + 1} / $year"
+            dataSelecionada = "$dayOfMonth / ${month + 1} / $year"
 
             val txtData = findViewById<TextView>(R.id.txt_buttonData)
             txtData.text = dataSelecionada
-
             dialog.dismiss()
         }
 
@@ -232,15 +194,28 @@ class TelaControle : AppCompatActivity() {
 
         val timePicker = dialog.findViewById<TimePicker>(R.id.timePicker)
         timePicker.setOnTimeChangedListener { _, hourOfDay, minute ->
-            val horaSelecionada = "$hourOfDay:$minute"
+            horaSelecionada = "$hourOfDay:$minute"
 
             val txtHora = findViewById<TextView>(R.id.txt_buttonHora)
             txtHora.text = horaSelecionada
-
             dialog.dismiss()
         }
 
         dialog.show()
     }
 
+    private fun setImages(){
+        this.binding.imageButton33.setImageResource(R.drawable.rosto_3_36)
+        this.binding.imageButton11.setImageResource(R.drawable.rosto_1_36)
+        this.binding.imageButton22.setImageResource(R.drawable.rosto_2_36)
+        this.binding.imageButton44.setImageResource(R.drawable.rosto_4_36)
+    }
+
+    private fun setText(){
+        this.binding.txtImageButton44.text = ""
+        this.binding.txtImageButton22.text = ""
+        this.binding.txtImageButton33.text = ""
+        this.binding.txtImageButton11.text = ""
+
+    }
 }
