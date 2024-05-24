@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appadm.adapters.MedicamentoAdapter
 import com.example.appadm.data.DataSource
+import com.example.appadm.databinding.ActivityMedicamentos1Binding
 import com.example.appadm.models.Medicamento
 
 class Medicamentos1 : AppCompatActivity() {
@@ -21,11 +22,13 @@ class Medicamentos1 : AppCompatActivity() {
     private lateinit var adapter: MedicamentoAdapter
     private var medicamentosList = listOf<Medicamento>()
     private var filteredMedicamentosList = listOf<Medicamento>()
+    private lateinit var binding: ActivityMedicamentos1Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_medicamentos1)
+        this.binding = ActivityMedicamentos1Binding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupView()
         loadInitialData()
 
@@ -39,6 +42,9 @@ class Medicamentos1 : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("TAG", "onResume() foi chamado")
+
+
+
     }
 
     private fun setupView() {
@@ -61,8 +67,10 @@ class Medicamentos1 : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = MedicamentoAdapter(medicamentosList)
+        adapter = MedicamentoAdapter(medicamentosList,)
         recyclerView.adapter = adapter
+
+
     }
 
     private fun setupSearchListener() {
