@@ -57,11 +57,11 @@
                 android:id="@+id/imageButton1"
                 android:layout_width="72dp"
                 android:layout_height="34dp"
-                android:layout_marginStart="42dp"
                 android:background="@android:color/transparent"
                 android:onClick="onClickImageButton1"
                 android:src="@drawable/schedule"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imageButton3"
                 app:layout_constraintTop_toTopOf="parent"
                 />
 
@@ -79,11 +79,11 @@
                 android:id="@+id/imageButton2"
                 android:layout_width="72dp"
                 android:layout_height="34dp"
-                android:layout_marginEnd="42dp"
                 android:background="@android:color/transparent"
                 android:onClick="onClickImageButton2"
                 android:src="@drawable/felicidade"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageButton3"
+                app:layout_constraintEnd_toStartOf="@id/imageButton4"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -103,9 +103,10 @@
                 android:background="@android:color/transparent"
                 android:onClick="onClickImageButton3"
                 android:src="@drawable/emergencia"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imageButton2"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toEndOf="@id/imageButton1"
+                />
 
             <TextView
                 android:id="@+id/txt_imageButton3"
@@ -116,6 +117,30 @@
                 app:layout_constraintTop_toBottomOf="@id/imageButton3"
                 app:layout_constraintEnd_toEndOf="@id/imageButton3"
                 />
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="72dp"
+                android:layout_height="34dp"
+                android:background="@android:color/transparent"
+                android:onClick="onClickImageButton1"
+                android:src="@drawable/perfil"
+                app:layout_constraintStart_toEndOf="@id/imageButton2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/txt_imageButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Perfil"
+                app:layout_constraintStart_toStartOf="@id/imageButton4"
+                app:layout_constraintTop_toBottomOf="@id/imageButton4"
+                app:layout_constraintEnd_toEndOf="@id/imageButton4"
+                />
+
+
 
 
 

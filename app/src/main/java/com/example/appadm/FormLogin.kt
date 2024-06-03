@@ -65,7 +65,7 @@ class FormLogin : AppCompatActivity() {
     }
 
     private fun openTelaControle() {
-        startActivity(Intent(this, TelaControle::class.java))
+        startActivity(Intent(this, TelaControleInicial::class.java))
     }
 
     private fun showSnackbar(view: View, message: String) {

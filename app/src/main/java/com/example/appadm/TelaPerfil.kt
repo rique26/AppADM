@@ -2,74 +2,50 @@ package com.example.appadm
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
-import com.example.appadm.adapters.TelaControleInicialAdapter
 import com.example.appadm.data.DataSourceSintomas
-import com.example.appadm.database.SintomaRoomDatabase
-import com.example.appadm.databinding.ActivityTelaControleInicialBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.appadm.databinding.ActivityTelaPerfilBinding
+import com.example.appadm.databinding.ResImgVerificadoBinding
 
-class TelaControleInicial : AppCompatActivity() {
-    private lateinit var binding: ActivityTelaControleInicialBinding
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: TelaControleInicialAdapter
-    private lateinit var fab: FloatingActionButton
-    private lateinit var database: SintomaRoomDatabase
-
+class TelaPerfil : AppCompatActivity() {
+    private lateinit var binding: ActivityTelaPerfilBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTelaControleInicialBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+        enableEdgeToEdge()
+        this.binding = ActivityTelaPerfilBinding.inflate(layoutInflater)
+        setContentView(this.binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        recyclerView = findViewById(R.id.recyclerview)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = TelaControleInicialAdapter(emptyList())
-        recyclerView.adapter = adapter
 
-        fab = binding.fab
-        fab.setOnClickListener {
-            startActivity(Intent(this, TelaControle::class.java))
-        }
 
-        // Initialize the database
-        database = Room.databaseBuilder(
-            applicationContext,
-            SintomaRoomDatabase::class.java,
-            "sintoma_database"
-        ).build()
 
-        // Fetch data from the database
-        fetchSintomasFromDatabase()
-
-        updateUiVisibility()
     }
+
 
     override fun onResume() {
         super.onResume()
 
-        binding.imageButton2.setImageResource(R.drawable.controle_azul)
-        binding.txtImageButton2.setTextColor(ContextCompat.getColor(this, R.color.blue_light))
+        binding.buttonSalvar.setOnClickListener {
+            startActivity(Intent(this, FormLogin::class.java))
+        }
+
+        binding.imageButton4.setImageResource(R.drawable.perfil_colorido)
+        binding.txtImageButton4.setTextColor(ContextCompat.getColor(this, R.color.blue_light))
 
         binding.imageButton2.setOnClickListener {
+            // Altera a imagem do ImageButton
             binding.imageButton2.setImageResource(R.drawable.controle_azul)
             binding.imageButton1.setImageResource(R.drawable.schedule)
             binding.imageButton3.setImageResource(R.drawable.emergencia)
@@ -89,9 +65,11 @@ class TelaControleInicial : AppCompatActivity() {
             )
 
             startActivity(Intent(this, TelaControleInicial::class.java))
+
         }
 
         binding.imageButton3.setOnClickListener {
+            // Altera a imagem do ImageButton
             binding.imageButton3.setImageResource(R.drawable.contato_azul)
             binding.imageButton1.setImageResource(R.drawable.schedule)
             binding.imageButton2.setImageResource(R.drawable.felicidade)
@@ -112,6 +90,7 @@ class TelaControleInicial : AppCompatActivity() {
         }
 
         binding.imageButton1.setOnClickListener {
+            // Altera a imagem do ImageButton
             binding.imageButton1.setImageResource(R.drawable.agenda_azul)
             binding.imageButton2.setImageResource(R.drawable.felicidade)
             binding.imageButton3.setImageResource(R.drawable.emergencia)
@@ -131,13 +110,15 @@ class TelaControleInicial : AppCompatActivity() {
             )
 
             startActivity(Intent(this, TelaAgendaInicial::class.java))
+
         }
 
         binding.imageButton4.setOnClickListener {
+            // Altera a imagem do ImageButton
             binding.imageButton4.setImageResource(R.drawable.perfil_colorido)
             binding.imageButton2.setImageResource(R.drawable.felicidade)
             binding.imageButton3.setImageResource(R.drawable.emergencia)
-            binding.imageButton1.setImageResource(R.drawable.schedule)
+            binding.imageButton3.setImageResource(R.drawable.schedule)
 
             binding.txtImageButton4.setTextColor(ContextCompat.getColor(this, R.color.blue_light))
             binding.txtImageButton2.setTextColor(
@@ -159,36 +140,12 @@ class TelaControleInicial : AppCompatActivity() {
                 )
             )
 
-            startActivity(Intent(this, TelaPerfil::class.java))
+
         }
 
-        fetchSintomasFromDatabase()
+
+
     }
 
-    private fun fetchSintomasFromDatabase() {
-        lifecycleScope.launch {
-            val sintomas = withContext(Dispatchers.IO) {
-                database.sintomaDao().getSintoma()
-            }
-            adapter.updateList(sintomas)
 
-            if (sintomas.isNotEmpty()) {
-                binding.txtSintomas.visibility = View.GONE
-                binding.imgArrow.visibility = View.GONE
-            } else {
-                binding.txtSintomas.visibility = View.VISIBLE
-                binding.imgArrow.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    private fun updateUiVisibility() {
-        if (DataSourceSintomas.getSintomas().isEmpty()) {
-            binding.txtSintomas.visibility = View.VISIBLE
-            binding.imgArrow.visibility = View.VISIBLE
-        } else {
-            binding.txtSintomas.visibility = View.GONE
-            binding.imgArrow.visibility = View.GONE
-        }
-    }
 }

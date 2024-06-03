@@ -1,8 +1,8 @@
 package com.example.appadm.models
 
 data class Sintoma(
-    var disposicao: String,
-    var horario: String,
-    var sintoma: String,
-    var dia: String
+    private var disposicao: String,
+    private var horario: String,
+    private var sintoma: String,
+    private var dia: String
 )

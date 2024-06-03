@@ -1,5 +1,6 @@
 package com.example.appadm
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,20 +10,29 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.example.appadm.adapters.MedicamentoAdapter
 import com.example.appadm.data.DataSource
+import com.example.appadm.database.MedicamentoRoomDatabase
+import com.example.appadm.database.models.MedicamentoAgenda
 import com.example.appadm.databinding.ActivityMedicamentos1Binding
 import com.example.appadm.models.Medicamento
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class Medicamentos1 : AppCompatActivity() {
+class Medicamentos1 : AppCompatActivity(), MedicamentoAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchEditText: EditText
     private lateinit var adapter: MedicamentoAdapter
     private var medicamentosList = listOf<Medicamento>()
     private var filteredMedicamentosList = listOf<Medicamento>()
     private lateinit var binding: ActivityMedicamentos1Binding
+    private lateinit var db: MedicamentoRoomDatabase
+    private lateinit var selectedMedicamentoName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +42,18 @@ class Medicamentos1 : AppCompatActivity() {
         setupView()
         loadInitialData()
 
-    }
+        db = Room.databaseBuilder(
+            applicationContext,
+            MedicamentoRoomDatabase::class.java, "medicamento_database"
+        ).build()
 
+    }
     override fun onStart() {
         super.onStart()
         Log.d("TAG", "onStart() foi chamado")
+
+
+
     }
 
     override fun onResume() {
@@ -67,7 +84,7 @@ class Medicamentos1 : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = MedicamentoAdapter(medicamentosList,)
+        adapter = MedicamentoAdapter(medicamentosList, this)
         recyclerView.adapter = adapter
 
 
@@ -91,4 +108,23 @@ class Medicamentos1 : AppCompatActivity() {
         }
         adapter.updateList(filteredMedicamentosList)
     }
+
+    override fun onItemClick(medicamento: Medicamento) {
+        selectedMedicamentoName = medicamento.produto
+        Log.d("TAG", "Selected Medicamento: $selectedMedicamentoName")
+        // You can now use the selectedMedicamentoName for further actions
+        val novoMedicamento = MedicamentoAgenda(selectedMedicamentoName)
+
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                db.medicamentoaDao().insert(novoMedicamento)
+            }
+        }
+
+        startActivity(Intent(this, TelaAgendaInicial::class.java))
+
+
+    }
+
+
 }
