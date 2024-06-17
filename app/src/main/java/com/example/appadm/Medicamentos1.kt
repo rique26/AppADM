@@ -121,7 +121,7 @@ class Medicamentos1 : AppCompatActivity(), MedicamentoAdapter.OnItemClickListene
             }
         }
 
-        startActivity(Intent(this, TelaAgendaInicial::class.java))
+        startActivity(Intent(this, TelaConfirmacaoMedicamentoAgenda::class.java))
 
 
     }

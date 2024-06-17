@@ -16,4 +16,10 @@
 
     </declare-styleable>
 
+    <declare-styleable name="ComponenteMedicamentoConfirmacao">
+        <attr name="horaText" format="string" />
+        <attr name="quantidadeText" format="string" />
+    </declare-styleable>
+
+
 </resources>

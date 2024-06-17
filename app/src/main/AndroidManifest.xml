@@ -15,10 +15,13 @@
         android:theme="@style/Theme.AppADM"
         tools:targetApi="31">
         <activity
+            android:name=".TelaPerfil"
+            android:exported="false" />
+        <activity
             android:name=".FormLogin"
             android:exported="false" />
         <activity
-            android:name=".TelaPerfil"
+            android:name=".TelaConfirmacaoMedicamentoAgenda"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
