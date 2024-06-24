@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
 
     <application
         android:allowBackup="true"
@@ -15,13 +19,13 @@
         android:theme="@style/Theme.AppADM"
         tools:targetApi="31">
         <activity
-            android:name=".TelaPerfil"
+            android:name=".ui.view.ProfileHomeScreen"
             android:exported="false" />
         <activity
-            android:name=".FormLogin"
+            android:name=".ui.view.FormLogin"
             android:exported="false" />
         <activity
-            android:name=".TelaConfirmacaoMedicamentoAgenda"
+            android:name=".ui.view.ScheduleHomeScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,29 +34,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TelaControle"
+            android:name=".ui.view.ControlScreen"
             android:exported="false" />
         <activity
-            android:name=".TelaControleInicial"
+            android:name=".ui.view.ControlHomeScreen"
             android:exported="false" />
         <activity
-            android:name=".TelaAgendaInicial"
+            android:name=".ui.view.ScheduleConfirmationMedicationScreen"
             android:exported="false" />
         <activity
-            android:name=".TelaPrincipal"
+            android:name=".ui.view.ButtonsBar"
             android:exported="false" />
         <activity
-            android:name=".Medicamentos1"
+            android:name=".ui.view.SearchMedicinesScreen"
             android:exported="false" />
         <activity
-            android:name=".TelaCadastroTeste"
+            android:name=".ui.view.TelaCadastroTeste"
             android:exported="false" />
         <activity
-            android:name=".TelaCadastroOficial"
+            android:name=".ui.view.FormRegister"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.view.MainActivity"
             android:exported="false" />
+
+        <receiver android:name=".AlarmReceiver" />
+
     </application>
 
 </manifest>
