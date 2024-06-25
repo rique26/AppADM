@@ -24,7 +24,7 @@
 //    init {
 //        loadInitialData()
 //    }
-//
+// /
 //    fun loadInitialData() {
 //        _medicamentosList.value = repository.getInitialMedicines()
 //    }
