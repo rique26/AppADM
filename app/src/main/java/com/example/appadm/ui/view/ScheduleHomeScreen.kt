@@ -43,7 +43,7 @@ class ScheduleHomeScreen : AppCompatActivity() {
         database = Room.databaseBuilder(
             applicationContext,
             MedicineReminderDatabase::class.java,
-            "nome-do-banco-de-dados"
+            "MedicineReminderDatabase"
         ).build()
 
 
