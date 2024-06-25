@@ -24,8 +24,6 @@ class ProfileImage(context: Context, attrs: AttributeSet) : LinearLayout(context
 
     }
 
-
-
     fun setImageProfile(resourceId: Int) {
         this.binding.imgProfileImage.setImageResource(resourceId)
     }

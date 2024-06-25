@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.firestore.FirebaseFirestore
 
-class FormRegister() : AppCompatActivity() {
+class FormRegister : AppCompatActivity() {
     private lateinit var binding: ActivityFormRegisterBinding
     var mensagens = arrayOf("Preencha todos os campos", "Cadastro realizado com sucesso")
     var usuarioID: String? = null
@@ -40,11 +40,6 @@ class FormRegister() : AppCompatActivity() {
                 insets
             })
 
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.i("LOG", "onStart() TelaCadastroOficial")
     }
 
     override fun onResume() {
@@ -65,20 +60,6 @@ class FormRegister() : AppCompatActivity() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.i("LOG", "onPause() TelaCadastroOficial")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.i("LOG", "onStop() TelaCadastroOficial")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.i("LOG", "onDestroy() TelaCadastroOficial")
-    }
 
     private fun CadastrarUsuario(v: View, email: String, senha: String) {
         val email = binding.editEmail.getText().toString()

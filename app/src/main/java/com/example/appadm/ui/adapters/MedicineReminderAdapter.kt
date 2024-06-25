@@ -21,33 +21,6 @@ class MedicineReminderAdapter(private var medicamentos: List<MedicineReminder>) 
         val txt2: TextView = itemView.findViewById(R.id.txt_2)
         val txt3: TextView = itemView.findViewById(R.id.txt_3)
         val txt4: TextView = itemView.findViewById(R.id.txt_4)
-
-
-//        init {
-//            btnMedicamento.setOnClickListener {
-//                val medicamento = medicamentos[adapterPosition]
-//                itemClickListener.onItemClick(medicamento)
-//
-//                // Define a cor de fundo quando o botão é pressionado
-//                val colorFrom = Color.TRANSPARENT
-//                val colorTo = itemView.context.resources.getColor(R.color.black) // Substitua pela sua cor de seleção
-//                val colorAnimation = ValueAnimator.ofObject(ArgbEvaluator(), colorFrom, colorTo)
-//                colorAnimation.duration = 1400 // Tempo da animação em milissegundos
-//
-//                colorAnimation.addUpdateListener { animator ->
-//                    btnMedicamento.setBackgroundColor(animator.animatedValue as Int)
-//                }
-//
-//                colorAnimation.start()
-//
-//                // Adicione um atraso para a mudança de cor de volta para a cor padrão
-//                val handler = Handler(Looper.getMainLooper())
-//                handler.postDelayed({
-//                    // Define a cor de fundo padrão quando o botão não está mais pressionado
-//                    btnMedicamento.setBackgroundResource(android.R.color.transparent)
-//                }, 1500)
-//            }
-//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicamentoAgendaViewHolder {
@@ -66,7 +39,6 @@ class MedicineReminderAdapter(private var medicamentos: List<MedicineReminder>) 
     }
 
     override fun getItemCount() = medicamentos.size
-
 
     fun updateList(newList: List<MedicineReminder>) {
         medicamentos = newList

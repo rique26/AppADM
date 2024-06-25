@@ -14,11 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.appadm.R
-import com.example.appadm.ui.adapters.MedicamentoAgendaAdapter
 import com.example.appadm.database.MedicineReminderDatabase
-import com.example.appadm.database.daos.MedicineReminderDao
-import com.example.appadm.database.models.MedicineReminder
 import com.example.appadm.databinding.ActivityScheduleHomeScreenBinding
+import com.example.appadm.ui.adapters.MedicineReminderAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -27,10 +25,8 @@ class ScheduleHomeScreen : AppCompatActivity() {
 
     private lateinit var binding: ActivityScheduleHomeScreenBinding
     private lateinit var database: MedicineReminderDatabase
-    private lateinit var medicineReminderDao: MedicineReminderDao
     private lateinit var recyclerView: RecyclerView
-    private var medicamentosList = listOf<MedicineReminder>()
-    private lateinit var adapter: MedicamentoAgendaAdapter
+    private lateinit var adapter: MedicineReminderAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +47,8 @@ class ScheduleHomeScreen : AppCompatActivity() {
         ).build()
 
 
-
-
         recyclerView = binding.recyclerview
-        adapter = MedicamentoAgendaAdapter(emptyList())
+        adapter = MedicineReminderAdapter(emptyList())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -67,7 +61,6 @@ class ScheduleHomeScreen : AppCompatActivity() {
 
 
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -152,7 +145,7 @@ class ScheduleHomeScreen : AppCompatActivity() {
             binding.imageButton4.setImageResource(R.drawable.perfil_colorido)
             binding.imageButton2.setImageResource(R.drawable.felicidade)
             binding.imageButton3.setImageResource(R.drawable.emergencia)
-            binding.imageButton3.setImageResource(R.drawable.schedule)
+            binding.imageButton1.setImageResource(R.drawable.schedule)
 
             binding.txtImageButton4.setTextColor(ContextCompat.getColor(this, R.color.blue_light))
             binding.txtImageButton2.setTextColor(
@@ -195,11 +188,6 @@ class ScheduleHomeScreen : AppCompatActivity() {
         }
 
     }
-
-
-
-
-
 
 
 }

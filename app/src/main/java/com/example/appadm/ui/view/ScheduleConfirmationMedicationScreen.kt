@@ -31,8 +31,6 @@ import kotlinx.coroutines.withContext
 class ScheduleConfirmationMedicationScreen : AppCompatActivity() {
 
     private lateinit var binding: ActivityScheduleConfirmationMedicationScreenBinding
-    private lateinit var horaSelecionada: String
-    private lateinit var qtdSelecionada: String
     private var selectedTime1: String = ""
     private var selectedTime2: String = ""
     private var selectedTime3: String = ""
@@ -58,10 +56,6 @@ class ScheduleConfirmationMedicationScreen : AppCompatActivity() {
 
         this.selectedMedicamentoName = intent.getStringExtra("SELECTED_MEDICAMENTO_NAME") ?: ""
 
-        val nomeMedicamento = selectedMedicamentoName
-
-
-
     }
 
     override fun onStart() {
@@ -74,7 +68,8 @@ class ScheduleConfirmationMedicationScreen : AppCompatActivity() {
         binding.btHora.setOnClickListener {
             showTimePickerDialog { selectedTime ->
                 selectedTime1 = selectedTime
-                binding.horario.text = selectedTime  // Atualiza o TextView com o horário selecionado
+                binding.horario.text =
+                    selectedTime  // Atualiza o TextView com o horário selecionado
                 println("Hora selecionada 1: $selectedTime")
             }
         }
@@ -86,7 +81,8 @@ class ScheduleConfirmationMedicationScreen : AppCompatActivity() {
         binding.btHora2.setOnClickListener {
             showTimePickerDialog { selectedTime ->
                 selectedTime2 = selectedTime
-                binding.horario2.text = selectedTime  // Atualiza o TextView com o horário selecionado
+                binding.horario2.text =
+                    selectedTime  // Atualiza o TextView com o horário selecionado
                 println("Hora selecionada 2: $selectedTime")
             }
         }
@@ -98,7 +94,8 @@ class ScheduleConfirmationMedicationScreen : AppCompatActivity() {
         binding.btHora3.setOnClickListener {
             showTimePickerDialog { selectedTime ->
                 selectedTime3 = selectedTime
-                binding.horario3.text = selectedTime  // Atualiza o TextView com o horário selecionado
+                binding.horario3.text =
+                    selectedTime  // Atualiza o TextView com o horário selecionado
                 println("Hora selecionada 3: $selectedTime")
             }
         }
@@ -110,12 +107,11 @@ class ScheduleConfirmationMedicationScreen : AppCompatActivity() {
         binding.btHora4.setOnClickListener {
             showTimePickerDialog { selectedTime ->
                 selectedTime4 = selectedTime
-                binding.horario4.text = selectedTime  // Atualiza o TextView com o horário selecionado
+                binding.horario4.text =
+                    selectedTime  // Atualiza o TextView com o horário selecionado
                 println("Hora selecionada 4: $selectedTime")
             }
         }
-
-
 
 
         binding.fab.setOnClickListener {
@@ -133,7 +129,7 @@ class ScheduleConfirmationMedicationScreen : AppCompatActivity() {
                         Toast.LENGTH_LONG
                     ).show()
 
-                    if(result)
+                    if (result)
                         finish()
 
                 }
@@ -166,7 +162,12 @@ class ScheduleConfirmationMedicationScreen : AppCompatActivity() {
         val popupView = inflater.inflate(R.layout.layout_custom_popup, null)
 
         // Create the PopupWindow
-        val popupWindow = PopupWindow(popupView, ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT, true)
+        val popupWindow = PopupWindow(
+            popupView,
+            ConstraintLayout.LayoutParams.WRAP_CONTENT,
+            ConstraintLayout.LayoutParams.WRAP_CONTENT,
+            true
+        )
 
         // Calculate the position of the button on the screen
         val location = IntArray(2)
@@ -228,49 +229,21 @@ class ScheduleConfirmationMedicationScreen : AppCompatActivity() {
         val dialog = builder.create()
         dialog.show()
     }
-    private fun buttonPopup(): String {
-        val dialogView = layoutInflater.inflate(R.layout.layout_custom_popup, null)
-        val bt_cp = dialogView.findViewById<Button>(R.id.bt_comprimido)
-        val bt_g = dialogView.findViewById<Button>(R.id.bt_grama)
-        val bt_mg = dialogView.findViewById<Button>(R.id.bt_miligrama)
-        val bt_mcg = dialogView.findViewById<Button>(R.id.bt_micrograma)
-        val bt_ui = dialogView.findViewById<Button>(R.id.bt_ui)
-        var msg = ""
 
-        bt_cp.setOnClickListener {
-            msg = "cp"
-        }
-        bt_cp.setOnClickListener {
-            msg = "g"
-        }
-        bt_cp.setOnClickListener {
-            msg = "mg"
-        }
-        bt_cp.setOnClickListener {
-            msg = "mcg"
-        }
-        bt_cp.setOnClickListener {
-            msg = "ui"
-        }
-
-        return msg
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-    }
 
     private suspend fun saveMedicamentoConfirmacao(name: String): Boolean {
-//        val horario1 = if (selectedTime1.isNotEmpty()) "$selectedTime1" + "h" else ""
-//        val horario2 = if (selectedTime2.isNotEmpty()) "$selectedTime2" + "h" else ""
-//        val horario3 = if (selectedTime3.isNotEmpty()) "$selectedTime3" + "h" else ""
-//        val horario4 = if (selectedTime4.isNotEmpty()) "$selectedTime4" + "h" else ""
 
         Log.d("TelaConfirmacaoMedicamentoAgenda", "Salvando Medicamento: $name")
 
-        // Insere no banco de dados
-        medicineReminderDao.insert(MedicineReminder(name, selectedTime1, selectedTime2, selectedTime3, selectedTime4))
+        medicineReminderDao.insert(
+            MedicineReminder(
+                name,
+                selectedTime1,
+                selectedTime2,
+                selectedTime3,
+                selectedTime4
+            )
+        )
 
         return true
     }
@@ -279,7 +252,11 @@ class ScheduleConfirmationMedicationScreen : AppCompatActivity() {
     private fun deleteAllMedicamentos() {
         lifecycleScope.launch {
             medicineReminderDao.deleteAllMedicamentos()
-            Toast.makeText(this@ScheduleConfirmationMedicationScreen, "Todos os medicamentos foram deletados.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this@ScheduleConfirmationMedicationScreen,
+                "Todos os medicamentos foram deletados.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

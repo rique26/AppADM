@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Estado quando o horário não está vazio -->
+    <item android:state_enabled="true" android:state_empty="false">
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp" /> <!-- Raio do arredondamento em dp -->
+            <solid android:color="@color/blue_light2" /> <!-- Cor de fundo quando o horário não está vazio -->
+        </shape>
+    </item>
+    <!-- Estado padrão -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="8dp" /> <!-- Raio do arredondamento em dp -->
+            <solid android:color="@android:color/transparent" /> <!-- Cor de fundo padrão transparente -->
+        </shape>
+    </item>
+</selector>

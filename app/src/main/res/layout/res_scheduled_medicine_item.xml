@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp"
+    android:paddingBottom="10dp"
+    android:layout_marginBottom="15dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_medicamentos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        android:background="@color/white2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp"
+            >
+
+            <Button
+                android:id="@+id/bt_item_medicamentos2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:drawableLeft="@drawable/medicamento"
+                android:fontFamily="sans-serif-light"
+                android:outlineProvider="none"
+                android:text="Nome medicamento"
+                android:textAlignment="textStart"
+                android:textColor="@color/black2"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                app:layout_constraintStart_toStartOf="@id/bt_item_medicamentos2"
+                app:layout_constraintTop_toBottomOf="@id/bt_item_medicamentos2"
+                tools:text="11:00" />
+
+            <TextView
+                android:id="@+id/txt_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                tools:text="11:00"
+                app:layout_constraintStart_toEndOf="@id/txt_1"
+                app:layout_constraintTop_toTopOf="@id/txt_1" />
+
+            <TextView
+                android:id="@+id/txt_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                app:layout_constraintStart_toEndOf="@id/txt_2"
+                app:layout_constraintTop_toTopOf="@id/txt_1"
+                tools:text="11:00" />
+
+            <TextView
+                android:id="@+id/txt_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                app:layout_constraintStart_toEndOf="@id/txt_3"
+                app:layout_constraintTop_toTopOf="@id/txt_1"
+                tools:text="11:00" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

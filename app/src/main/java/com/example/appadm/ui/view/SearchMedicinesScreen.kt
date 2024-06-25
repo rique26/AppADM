@@ -34,7 +34,6 @@ class SearchMedicinesScreen : AppCompatActivity(), MedicineAdapter.OnItemClickLi
     private var filteredMedicamentosList = listOf<Medicamento>()
     private lateinit var binding: ActivitySearchMedicinesScreenBinding
     private lateinit var db: AllMedicinesRoomDatabase
-    private lateinit var medicineDao: MedicineDao
     private lateinit var selectedMedicamentoName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,24 +50,8 @@ class SearchMedicinesScreen : AppCompatActivity(), MedicineAdapter.OnItemClickLi
         ).build()
 
 
-
-
-    }
-    override fun onStart() {
-        super.onStart()
-        Log.d("TAG", "onStart() foi chamado")
-
-
-
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d("TAG", "onResume() foi chamado")
-
-
-
-    }
 
     private fun setupView() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -118,7 +101,6 @@ class SearchMedicinesScreen : AppCompatActivity(), MedicineAdapter.OnItemClickLi
     override fun onItemClick(medicamento: Medicamento) {
         selectedMedicamentoName = medicamento.produto
         Log.d("TAG", "Selected Medicamento: $selectedMedicamentoName")
-        // You can now use the selectedMedicamentoName for further actions
         val novoMedicamento = AllMedicines(selectedMedicamentoName)
 
         lifecycleScope.launch {
@@ -131,7 +113,6 @@ class SearchMedicinesScreen : AppCompatActivity(), MedicineAdapter.OnItemClickLi
             putExtra("SELECTED_MEDICAMENTO_NAME", novoMedicamento.nome_medicamento)
         }
 
-        //startActivity(Intent(this, TelaConfirmacaoMedicamentoAgenda::class.java))
         startActivity(intent)
 
     }

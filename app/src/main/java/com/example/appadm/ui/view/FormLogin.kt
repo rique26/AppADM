@@ -16,27 +16,39 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 
 class FormLogin : AppCompatActivity() {
     private lateinit var binding: ActivityFormLoginBinding
-    private val mensagens = arrayOf("Preencha todos os campos", "Login realizado com sucesso")
+    private val messages = arrayOf("Preencha todos os campos", "Login realizado com sucesso")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFormLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         enableEdgeToEdge()
+        setupWindowInsets()
+        setupClickListeners()
+    }
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.formlogin) { v: View, insets: WindowInsetsCompat ->
+    override fun onResume() {
+        super.onResume()
+        // Atualizar a interface do usuário quando a atividade for retomada
+        updateUI()
+    }
+
+    private fun setupWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.formlogin) { view: View, insets: WindowInsetsCompat ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
 
-        binding.buttonEntrar.setOnClickListener { v ->
+    private fun setupClickListeners() {
+        binding.buttonEntrar.setOnClickListener { view ->
             val email = binding.editEmail.text.toString()
-            val senha = binding.editSenha.text.toString()
-            if (email.isEmpty() || senha.isEmpty()) {
-                showSnackbar(v, mensagens[0])
+            val password = binding.editSenha.text.toString()
+            if (email.isEmpty() || password.isEmpty()) {
+                showSnackbar(view, messages[0])
             } else {
-                loginUsuario(v, email, senha)
+                loginUser(view, email, password)
             }
         }
 
@@ -45,24 +57,24 @@ class FormLogin : AppCompatActivity() {
         }
     }
 
-    private fun loginUsuario(v: View, email: String, senha: String) {
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha)
+    private fun loginUser(view: View, email: String, password: String) {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    showSnackbar(v, mensagens[1])
-                    openTelaControle()
+                    showSnackbar(view, messages[1])
+                    openControlScreen()
                 } else {
-                    val erro = when (val exception = task.exception) {
+                    val error = when (task.exception) {
                         is FirebaseAuthInvalidUserException -> "Usuário não encontrado."
                         is FirebaseAuthInvalidCredentialsException -> "Credenciais inválidas."
                         else -> "Erro ao realizar login."
                     }
-                    showSnackbar(v, erro)
+                    showSnackbar(view, error)
                 }
             }
     }
 
-    private fun openTelaControle() {
+    private fun openControlScreen() {
         startActivity(Intent(this, ControlHomeScreen::class.java))
     }
 
@@ -71,5 +83,12 @@ class FormLogin : AppCompatActivity() {
             .setBackgroundTint(Color.BLUE)
             .setTextColor(Color.BLACK)
             .show()
+    }
+
+    private fun updateUI() {
+        // Atualizar qualquer parte da interface do usuário que precise ser renovada quando a atividade é retomada
+        // Exemplo: limpar campos de texto
+        binding.editEmail.text.clear()
+        binding.editSenha.text.clear()
     }
 }
