@@ -1,4 +1,5 @@
-Projeto Bip:
+(Em desenvolvimento) 
+Projeto Bip: 
 O Bip é um aplicativo Android desenvolvido para monitoramento de saúde e gestão de medicamentos, criado como parte de um projeto acadêmico.
 Ele utiliza a arquitetura MVVM para garantir um código estruturado e modular.
 
